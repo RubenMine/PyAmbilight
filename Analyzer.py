@@ -54,7 +54,8 @@ class FrameAnalyzer:
             segment = avg_color_for_col[start_x+i:start_x+i+pixel_for_led]
             color = np.median(segment, axis=0)
             listOfColours.append(color)
-            
+        
+        # The listOfColours is a list of BGR values
         return listOfColours
 
 
