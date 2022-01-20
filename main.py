@@ -1,19 +1,6 @@
 import cv2 as cv
-import numpy as np
-import time
 
 from Analyzer import FrameAnalyzer
-
-def resize_frame(frameList, scale_percent):
-    frameListResized = list()
-
-    for img in frameList:
-        width = int(img.shape[1] * scale_percent / 100)
-        height = int(img.shape[0] * scale_percent / 100)
-        dim = (width, height)
-        frameListResized.append(cv.resize(img, dim))
-
-    return frameListResized
         
 frame = cv.imread("prova.jpg")
 fa = FrameAnalyzer(edge_accuracy=50, number_of_led=180)
