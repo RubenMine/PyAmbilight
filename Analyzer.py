@@ -37,13 +37,6 @@ class FrameAnalyzer:
         pixel_for_led = frame.shape[1]//self.number_of_led
         uncovered_pixels= frame.shape[1]%self.number_of_led
 
-        """
-        print(f"TOTAL PIXEL {frame.shape[1]}")
-        print(f"PIXEL FOR LED {pixel_for_led}")
-        print(f"UNCOVERED PIXELS {uncovered_pixels}")
-        print(f"FROM {self.number_of_led-uncovered_pixels}* LED ADDING ONE PIXEL")
-        """
-
         i=0
         for iter, start_x in enumerate([n for cont, n in enumerate(range(0, frame.shape[1]+1, pixel_for_led)) if cont < self.number_of_led]):
             if iter == self.number_of_led-uncovered_pixels-1:
