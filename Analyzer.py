@@ -23,10 +23,10 @@ class FrameAnalyzer:
     def extract_edges_from_frame(self):
         limit = self.edge_accuracy
 
-        edgeA = self.frame[self.frame_y - limit:]
-        edgeC = cv.rotate(self.frame[:limit], cv.ROTATE_180)    
-        edgeB = cv.rotate(self.frame[:, self.frame_x-limit:], cv.ROTATE_90_CLOCKWISE)
-        edgeD = cv.rotate(self.frame[:, :limit], cv.ROTATE_90_COUNTERCLOCKWISE)
+        edgeA = cv.flip(self.frame[self.frame_y - limit:], 1)
+        edgeC = cv.flip(cv.rotate(self.frame[:limit], cv.ROTATE_180), 1)
+        edgeD = cv.flip(cv.rotate(self.frame[:, self.frame_x-limit:], cv.ROTATE_90_CLOCKWISE), 1)
+        edgeB = cv.flip(cv.rotate(self.frame[:, :limit], cv.ROTATE_90_COUNTERCLOCKWISE), 1)
         return [edgeA, edgeB, edgeC, edgeD]
 
 
@@ -46,7 +46,7 @@ class FrameAnalyzer:
             
             segment = avg_color_for_col[start_x+i:start_x+i+pixel_for_led]
             color = np.median(segment, axis=0)
-            listOfColours.append(color)
+            listOfColours.append(color.astype(int))
         
         # The listOfColours is a list of BGR values
         return listOfColours
